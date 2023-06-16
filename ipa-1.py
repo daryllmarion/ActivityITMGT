@@ -33,7 +33,21 @@ def savings(gross_pay, tax_rate, expenses):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    gp = int(gross_pay)
+    tr = float(tax_rate)
+    exp = int(expenses)
+    
+    
+    paid_tax = gp - (gp*tr)
+    excess = int(paid_tax - exp)
+    
+    while True:
+        if tr < 0:
+            return "Error"
+        elif tr > 1:
+            return "Error"
+        else:
+            return excess
 
 def material_waste(total_material, material_units, num_jobs, job_consumption):
     '''Material Waste.
@@ -68,7 +82,15 @@ def material_waste(total_material, material_units, num_jobs, job_consumption):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    mu = str(material_units)
+    tm = int(total_material)
+    nj = int(num_jobs)
+    jc = int(job_consumption)
+    
+    total_consumption = nj * jc
+    waste = str(tm - total_consumption)
+    
+    return("The total waste is " + waste + mu)
 
 def interest(principal, rate, periods):
     '''Interest.
@@ -98,7 +120,14 @@ def interest(principal, rate, periods):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    p = int(principal)
+    r = float(rate)
+    pe = int(periods)
+    
+    simple_interest = p * (r * pe)
+    investment_value = int(p + simple_interest)
+    
+    return investment_value
 
 def body_mass_index(weight, height):
     '''Body Mass Index.
@@ -134,4 +163,10 @@ def body_mass_index(weight, height):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    convert_kg = weight*0.45359237
+    convert_to_inches = (height[0]*12)+(height[1])
+    convert_meters = convert_to_inches*0.0254
+    
+    BMI = convert_kg/convert_meters**2
+    
+    return BMI
