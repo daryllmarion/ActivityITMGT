@@ -44,13 +44,13 @@ def relationship_status(from_member, to_member, social_graph):
     status = ""
     if to_member in social_graph.get(from_member).get("following"):
         if from_member in social_graph.get(to_member).get("following"):
-            status = "Friends"
+            status = "friends"
         else:
-            status = "Follower"
+            status = "follower"
     elif from_member in social_graph.get(to_member).get("following"):
-        status = "Followed by"
+        status = "followed by"
     else:
-        status = "No relationship"
+        status = "fo relationship"
     return status
 
 
@@ -89,7 +89,7 @@ def tic_tac_toe(board):
         checkset = set(board[row])
         if len(checkset) == 1 and '' not in checkset:
             win = True
-            break
+            return checkset
         else:
             win = False
     
@@ -103,20 +103,19 @@ def tic_tac_toe(board):
         checklist = []
         if len(checkset) == 1 and '' not in checkset:
             win = True 
-            print(checkset)
-            break
+            return checkset
         else:
             win = False
 
     #Checking Left Diagonal
     
     for leftdiag in range(size):
-        checklist += (board[leftdiag][leftdiag])
+        checklist.append(board[leftdiag][leftdiag])
         
     checkset = set(checklist)
     if len(checkset) == 1 and '' not in checklist:
         win = True
-        print(checkset)    
+        return checkset  
     
     checklist = []
     
@@ -134,17 +133,15 @@ def tic_tac_toe(board):
     checkset = set(checklist)
     if len(checkset) == 1 and '' not in checklist:
         win = True 
-        print(checkset)
+        return checkset
     
     checklist = []
         
     
     #Final result output
    
-    if(win):
-        return("You win!")
-    else:
-        return("You lose!")
+    if win == False:
+        return("No Winners")
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -179,20 +176,19 @@ def eta(first_stop, second_stop, route_map):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     total_travel_time = 0
     
-    for stop_pair, leg in route_map.items():
-        if first_stop == second_stop: #if round trip
-            for leg in legs.value():
-                total_travel_time += leg['travel_time_mins']
-            return total_travel_time
+    if first_stop == second_stop: #if round trip
+        total_travel_time = 0
+        return total_travel_time
         
-        if first_stop in stop_pair and first_stop == stop_pair[0]:
-            if second_stop == stop_pair[1]: #if one route/leg
-                total_travel_time = leg['travel_time_mins']
-                return total_travel_time
-            elif second_stop != stop_pair[1]: #if two route/legs
-                for stop_pair, leg in route_map.items():
-                    if first_stop == stop_pair[0]:
-                        total_travel_time += leg['travel_time_mins']
-                    if second_stop == stop_pair[1]:
-                        total_travel_time += leg['travel_time_mins']
-                    return total_travel_time
+    if (first_stop, second_stop) in route_map: #one-stop
+        return route_map[(first_stop, second_stop)]['travel_time_mins']    
+        
+    # Iterate over all possible routes
+    for key in route_map.keys():
+        if key[0] == first_stop:
+            # Recursively check if there is a route from the intermediate stop to the second stop
+            total_travel_time = eta(key[1], second_stop, route_map)
+            
+            # If a route is found, return the total travel time
+            if total_travel_time is not None:
+                return route_map[key]['travel_time_mins'] + total_travel_time
