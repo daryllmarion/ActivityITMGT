@@ -33,7 +33,7 @@ def savings(gross_pay, tax_rate, expenses):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    gp = int(gross_pay)
+     gp = int(gross_pay)
     tr = float(tax_rate)
     exp = int(expenses)
     
@@ -89,8 +89,9 @@ def material_waste(total_material, material_units, num_jobs, job_consumption):
     
     total_consumption = nj * jc
     waste = str(tm - total_consumption)
+    total_waste = str(waste + " " + mu)
     
-    return("The total waste is " + waste + mu)
+    return(total_waste)
 
 def interest(principal, rate, periods):
     '''Interest.
