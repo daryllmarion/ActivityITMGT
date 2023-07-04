@@ -183,41 +183,11 @@ def vigenere_cipher(message, key):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    uncipher = [input for input in message]
-    #"input for input in message" is a form of list comprehension. 
-    keychar = [input for input in key]
-    #this is also a form of list comprehension
-    
-    for i in range(len(uncipher)):
-        #the range stops at the length of uncipher so that the function goes through every letter of the word.
-        if uncipher[i] != " ":
-            #this is to ensure that the blank inputs aren't affected by the code.
-
-            if alphabet.index(uncipher[i]) + alphabet.index(keychar[i]) < len(alphabet): 
-                #this is to ensure that the sum between the character in message and the number of shifts does not go over the length of the alphabet
-                alphabet_index = alphabet.index(uncipher[i])
-                #this is to store the value of the initial index
-                alphabet_shifted_index = alphabet.index(uncipher[i]) + alphabet.index(keychar[i])
-                #this is to store the value of the shifted index
-                uncipher[i] = alphabet[alphabet_shifted_index]
-                #gives the corresponding letter of the given index
-
-            else:
-
-                alphabet_shifted_index = (alphabet.index(uncipher[i]) + alphabet.index(keychar[i])) % len(alphabet)
-                uncipher[i] = alphabet[alphabet_shifted_index]
-
-        else:
-            print(" ")
-    cipher = "".join(uncipher)
-    #concatenates all elements of the list uncipher into a string
-    return cipheralphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    
     
     if len(key) < len(message):
         message_length = len(message)
         num_repeated = int(message_length/len(key) + 1)
-        new_key = key * num_repeated
+        new_key = key * num_repeated #KEYKEYKEY
         key = new_key[:message_length]
         print (key)
         
@@ -226,15 +196,9 @@ def vigenere_cipher(message, key):
         
     for i in range(len(message)):
         if unciphered[i] != " ":
-            if alphabet.index(unciphered[i]) + alphabet.index(keychar[i]) < len(alphabet): 
-                alphabet_index = alphabet.index(unciphered[i])
-                alphabet_shifted_index = alphabet.index(unciphered[i]) + alphabet.index(keychar[i])
-                unciphered[i] = alphabet[alphabet_shifted_index]
-
-            else:
-                alphabet_index = (alphabet.index(unciphered[i]) + alphabet.index(keychar[i])) % len(alphabet)
-                alphabet_shifted_index = alphabet_index
-                unciphered[i] = alphabet[alphabet_shifted_index]
+            alphabet_index = (alphabet.index(unciphered[i]) + alphabet.index(keychar[i])) % len(alphabet)
+            alphabet_shifted_index = alphabet_index
+            unciphered[i] = alphabet[alphabet_shifted_index]
                 
     cipher = ''.join(unciphered) 
     return cipher
